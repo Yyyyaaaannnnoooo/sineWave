@@ -1,9 +1,16 @@
 let cnv;
 let radius = 10;
 let vertices = 4;
+let inc;
+let wave = 0;
+let waveHeight = 10;
+let waveFreq = 0;
+let period = 3;
+let loop = 30;
 function setup() {
   cnv = createCanvas(innerWidth, innerHeight);
   cnv.parent('p5Sketch');
+  inc = PI / 30;
 }
 
 function draw() {
@@ -13,9 +20,12 @@ function draw() {
 
   let value = document.getElementById('vertices').value;
   vertices = value;
-  for (let i = 1; i <= 10; i++) {
-    polygon(vertices, radius * i, width / 2, height / 2);
+  for (let i = 1; i <= loop; i++) {
+    waveFreq = map(i, 0, loop, 0, TWO_PI * period);
+    let y = (height / 2) + (sin(wave + waveFreq) * waveHeight);
+    polygon(vertices, radius * i, width / 2, y);
   }
+  wave += inc;
 }
 
 // rect(x, y, 300, 500);
