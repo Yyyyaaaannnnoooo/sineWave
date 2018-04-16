@@ -10,7 +10,7 @@ let polygonNum = 30;
 function setup() {
   cnv = createCanvas(innerWidth, innerHeight);
   cnv.parent('p5Sketch');
-  inc = PI / 50;
+  inc = PI / 50;// this is the speed of the wave
 }
 
 function draw() {
@@ -24,15 +24,23 @@ function draw() {
   waveHeight = document.getElementById('height').value;
   polygonNum = document.getElementById('number').value;
   for (let i = 1; i <= polygonNum; i++) {
+    // here we define the wave frequency 
     waveFreq = map(i, 0, polygonNum, 0, TWO_PI * period);
+    // here we define how the single polygons move along their y axis
     let y = (height / 2) + (sin(wave + waveFreq) * waveHeight);
+    // here we draw the polygon
     polygon(vertices, radius * i, 5 * i, width / 2, y);
   }
   wave += inc;
 }
-
-// rect(x, y, 300, 500);
-
+/**
+ * this function draws a squished polygon
+ * @param {Number} vert number of vertices
+ * @param {Number} r radius
+ * @param {Number} offset offset of the points
+ * @param {Number} posX position on x axis
+ * @param {Number} posY position on y axis
+ */
 function polygon(vert, r, offset, posX, posY) {
   beginShape(POINTS);
   for (let i = 0; i < vert; i++) {
