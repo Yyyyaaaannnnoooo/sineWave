@@ -43,9 +43,11 @@ function draw() {
  */
 function polygon(vert, r, offset, posX, posY) {
   beginShape(POINTS);
+  // draw a polygon using sine and cosine and polar coordinate algorithm
   for (let i = 0; i < vert; i++) {
     let angle = map(i, 0, vert, 0 + offset, TWO_PI + offset);
     let x = cos(angle) * r + posX;
+    // we divide the radius by 2 to create a 3d effect
     let y = sin(angle) * (r / 2) + posY;
     vertex(x, y);
   }
